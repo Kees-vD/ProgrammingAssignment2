@@ -1,15 +1,50 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
-
+## Sets up function closure/environment with matrix data (parameter x), 
+## its inverse (variable inverse) and the setter- and getter-functions
+## for accessing the data in the environment.
 makeCacheMatrix <- function(x = matrix()) {
+      inverse <- NULL
+      
+      ## set and get functions for matrix
+      set <- function (newmatrix) {
+            x <<- newmatrix
+            inverse <<- NULL
+      }
+      
+      get <- function() x
+      
+      ## set and get functions for inverse calculation
+      setinverse <- function (inverseP) inverse <<- inverseP      
+      
+      getinverse <- function () inverse
+      
 
+      ## return object with getter- and setter-functions
+      ## (returned object also includes reference to environment)
+      list(set = set, get = get, setinverse = setinverse
+           , getinverse = getinverse )
+      
 }
 
 
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+## This function takes the returned list-object from makeCacheMatrix
+## as a parameter. And calculates the inverse or returns the cached 
+## inverse of the matrix that is in the function environment
+## referenced in object x.
+cacheSolve <- function(x) {      
+      
+      ## get inverse 
+      solv <- x$getinverse()
+      
+      if(!is.null(solv)) {
+            message("getting cached data")
+            return(solv)
+      }
+      
+      matr <- x$get()
+      solv <- solve(matr)
+      x$setinverse(solv)
+      solv      
 }
