@@ -1,5 +1,5 @@
-## Put comments here that give an overall description of what your
-## functions do
+## First use makeCacheMatrix to store the matrix. Then the pass the returned object
+## to cacheSolve as a parameter. Use cacheSolve to calculate the inverse of the matrix.
 
 ## Sets up function closure/environment with matrix data (parameter x), 
 ## its inverse (variable inverse) and the setter- and getter-functions
